@@ -65,6 +65,7 @@ class QuestionBank extends Model implements HasMedia
         'answer_response_4',
         'answer_response_5',
         'answer_response_6',
+        'udf_1', //check question type
     ];
 
     public $filterable = [

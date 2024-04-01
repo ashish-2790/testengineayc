@@ -67,6 +67,11 @@
         </div>
     </div>
 
+    <div class="form-group w-full lg:w-6/12 px-4">
+        <label class="form-label " for="video_url">Multiple Choice</label>
+        <input class="form-cotrol" type="checkbox" name="multiple_choice" id="multiple_choice" wire:model="multiple_choice">
+    </div>
+
     <div class="row  m-0 g-5  flex">
         <div class=" w-full lg:w-4/12 px-4  pt-4 form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
             <label class="form-label" for="choice_1">{{ trans('cruds.questionBank.fields.choice_1') }}</label>
@@ -78,7 +83,7 @@
                 {{ trans('cruds.questionBank.fields.choice_1_helper') }}
             </div>
         </div>
-        @if($questionBank->related_test_type_id == 2)
+        @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
                 <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
@@ -110,7 +115,7 @@
                 {{ trans('cruds.questionBank.fields.choice_2_helper') }}
             </div>
         </div>
-        @if($questionBank->related_test_type_id == 2)
+        @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
                 <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
@@ -139,7 +144,7 @@
                 {{ trans('cruds.questionBank.fields.choice_3_helper') }}
             </div>
         </div>
-        @if($questionBank->related_test_type_id == 2)
+        @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
                 <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
@@ -168,7 +173,7 @@
                 {{ trans('cruds.questionBank.fields.choice_4_helper') }}
             </div>
         </div>
-        @if($questionBank->related_test_type_id == 2)
+        @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
                 <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
@@ -197,7 +202,7 @@
                 {{ trans('cruds.questionBank.fields.choice_5_helper') }}
             </div>
         </div>
-        @if($questionBank->related_test_type_id == 2)
+        @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
                 <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
@@ -217,7 +222,7 @@
     </div>
 
     <div class="row  m-0 g-5  flex">
-        @if($questionBank->related_test_type_id != 2)
+        @if($multiple_choice != 1)
         <div class="w-full lg:w-4/12 px-4  pt-4 form-group {{ $errors->has('questionBank.right_choice') ? 'invalid' : '' }}">
             <label class="form-label" for="right_choice">{{ trans('cruds.questionBank.fields.right_choice') }}</label>
             <input class="form-control" type="text" name="right_choice" id="right_choice" wire:model.defer="questionBank.right_choice">

@@ -25,6 +25,7 @@ class Create extends Component
     public $show_drop_zone = 0;
     public $questiontext;
     public $questionpaper;
+    public $multiple_choice = 0;
 
     public QuestionBank $questionBank;
 
@@ -127,7 +128,11 @@ class Create extends Component
 
     public function submit()
     {
+
         $this->validate();
+        if($this->multiple_choice == true){
+            $this->questionBank->udf_1 = 1;
+        }
         $this->questionBank->question_text = $this->questiontext;
 
         $this->questionBank->save();

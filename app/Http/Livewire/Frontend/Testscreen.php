@@ -198,6 +198,9 @@ class Testscreen extends Component
 
     }
 
+
+
+
     public function markAnswer($question_id)
     {
         // Check if $this->answer is empty
@@ -217,28 +220,37 @@ class Testscreen extends Component
         $student_test_answer->answer_choice = $this->answer;
         $student_test_answer->answer_status = 3;
         $student_test_answer->save();
-        if($this->get_test_detail->related_test_type_id == 2)
-        {
-            $get_correct_response = QuestionBank::where('id', $question_id)
+
+        $question_content = QuestionBank::where('id', $question_id)
             ->first();
 
-        }
-        else {
-            $get_correct_response = QuestionBank::where('id', $question_id)->first()->right_choice;
-            $get_score_for_question = QuestionBank::where('id', $question_id)->first()->score_right;
-            $get_negative_score_for_question = QuestionBank::where('id', $question_id)->first()->score_wrong;
-        }
+        if($question_content->udf_1 == 1) {
 
+            $answer = $this->answer; // Student Answer
+            $question_content = $question_content; // Question Content
+
+            $score = compareAndCalculateScore($answer, $question_content);
+
+            $student_test_answer->score = $score;
+            $student_test_answer->save();
+        }
+      else {
+          $get_correct_response = $question_content->right_choice;
+          $get_score_for_question = $question_content->score_right;
+          $get_negative_score_for_question = $question_content->score_wrong;
+
+          if ($this->answer == $get_correct_response) {
+              $student_test_answer->score = $get_score_for_question;
+              $student_test_answer->save();
+          } else {
+              $student_test_answer->score = $get_negative_score_for_question;
+              $student_test_answer->save();
+          }
+      }
 
         $next_serial_no = $student_test_answer->udf_1 + 1;
 
-        if ($this->answer == $get_correct_response) {
-            $student_test_answer->score = $get_score_for_question;
-            $student_test_answer->save();
-        } else {
-            $student_test_answer->score = $get_negative_score_for_question;
-            $student_test_answer->save();
-        }
+
 
         $this->dispatchBrowserEvent('alert', [
             'type' => 'success',
@@ -262,6 +274,8 @@ class Testscreen extends Component
         }
 
     }
+
+
 
     public function clearResponse($question_id)
     {

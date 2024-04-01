@@ -38,6 +38,7 @@ class StudentExamlist extends Component
             ->where('valid_to', '>=', $this->current_date_time)
             ->exists();
 
+
         if (!$check_school_validity) {
             $this->get_exam_list = [];
         } else {
@@ -46,6 +47,8 @@ class StudentExamlist extends Component
                 ->where('valid_from', '<=', $this->current_date_time)
                 ->where('valid_to', '>=', $this->current_date_time)
                 ->get();
+
+
 
             foreach ($this->get_exam_list as $key => $value) {
                 $get_student_test_taken = StudentTestTaken::where('related_student_id', $user_id)
