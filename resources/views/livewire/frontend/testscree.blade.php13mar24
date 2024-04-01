@@ -1,0 +1,99 @@
+<div x-data="setup()">
+    <button wire:click="getQuestionBank()">click</button>
+    <template x-if="questionbank.length === 0">
+        <div>Loading...</div>
+    </template>
+    <div x-text="textvar"></div>
+
+    <div class="ms-1">
+        <span class="text-dark fw-bold rounded-3">Question Paper: </span>
+        <span class="text-dark text-xs text-uppercase fw-bold ms-1" x-text="questionpaper.question_paper_name"></span>
+    </div>
+
+    <span class="text-dark fw-bold rounded-3">Ability: </span>
+    <template x-if="questionpaper.relatedAbility">
+        <template x-for="(ab, index) in questionpaper.relatedAbility" :key="index">
+            <div class="ms-1">
+                <button wire:click="getAbilityquestion(ab.id)">
+                    <span class="text-dark text-xs text-uppercase fw-bold ms-1" x-text="ab.ability_name"></span>
+                </button>
+            </div>
+        </template>
+    </template>
+
+    <div class="row">
+        <div class="col-md-6">
+            <template x-if="questionbank.length > 0">
+                <template x-for="(question, index) in questionbank" :key="index">
+                    <div x-show="question.isOpen">
+                        <div class="ms-1">
+                            <span class="text-dark fw-bold rounded-3">Question: </span>
+                            {{--                            <span class="text-dark text-xs text-uppercase fw-bold ms-1" x-text="question.question_text"></span>--}}
+                        </div>
+                        <div x-html="question.question_text"></div>
+                        <span class="text-dark fw-bold rounded-3">Options: </span>
+
+                        <div class="text-dark text-xs text-uppercase fw-bold ms-1" x-html="question.choice_1"></div>
+                        <div class="text-dark text-xs text-uppercase fw-bold ms-1" x-html="question.choice_2"></div>
+                        <div class="text-dark text-xs text-uppercase fw-bold ms-1" x-html="question.choice_3"></div>
+                        <div class="text-dark text-xs text-uppercase fw-bold ms-1" x-html="question.choice_4"></div>
+                        <div class="text-dark text-xs text-uppercase fw-bold ms-1" x-html="question.choice_5"></div>
+                    </div>
+                </template>
+            </template>
+        </div>
+
+        <div class="col-md-6">
+            <template x-if="questionbank.length > 0">
+                <template x-for="(question, index) in questionbank" :key="index">
+                    <div>
+                        <div class="ms-1 pt-3">
+                            <!-- Use a button to toggle the isOpen property -->
+                            <button class="btn btn-sm bg-blue-500" x-on:click="openQuestion(question)">
+                                <span class="text-dark text-xs text-uppercase fw-bold ms-1" x-text="question.id"></span>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setup() {
+        return {
+            questionbank: @entangle('question_bank'),
+            questionpaper: @entangle('question_paper'),
+            textvar: @entangle('textvar'),
+
+            init() {
+                var self = this;
+
+                console.log('Received question data:', this.questionpaper);
+
+                // Livewire.on('questiondata', function(data) {
+                //     self.questionbank = data.map(question => ({
+                //         question,
+                //         isOpen: false // Add a property to track if the question is open
+                //     }));
+                // });
+
+            },
+
+            // openQuestion(question) {
+            //     // Close all other questions
+            //     this.questionbank.forEach(q => {
+            //         q.isOpen = false;
+            //     });
+            //
+            //     // Open the clicked question
+            //     question.isOpen = true;
+            // }
+        };
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        setup().init();
+    });
+</script>
