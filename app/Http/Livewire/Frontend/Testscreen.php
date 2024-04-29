@@ -46,6 +46,7 @@ class Testscreen extends Component
     public $lastSampleQuestion;
     public $intial_time_zero;
     public $createTestID;
+    public $show_instructions = true;
 
 
     public function initializeTest()
@@ -117,17 +118,34 @@ class Testscreen extends Component
 
         $test_id = $_GET['tid'] ?? '';
         $this->createTestID=$_GET['tid'] ?? '';
+
+        $creted_test = CreateTest::where('id', $test_id)->first();
+        $test_type = $creted_test->related_test_type_id;
+        $ability_master_instruction_count = AbilityMaster::where('related_test_id', $test_type)
+            ->where(function ($query) {
+                $query->whereNotNull('ability_instruction')
+                    ->orWhere('ability_instruction', '');
+            })
+            ->count();
+        if($ability_master_instruction_count == 0)
+        {
+            $this->show_instructions = false;
+        }
+
         if (!empty($this->createTestID)) {
             $this->initializeTest();
             $this->allQuestionsList = getAllQuestionList($this->student_test_takenid);
             // Set the Instruction & Sample Question array to False
             foreach($this->allQuestionsList->groupBy("relatedAbility.ability_name") as $ability_name => $ability_name_items)
             {
+
                 $this->instructionsShown[$ability_name_items->first()->udf_2] = false;
                 $this->sampleQuestionsShown[$ability_name_items->first()->udf_2] = false;
             }
             $this->question_text =  $this->allQuestionsList->first();
+
             $this->getAbilityInstruction($this->question_text->udf_2);
+
             $this->getSampleQuestion($this->question_text->udf_2,$currentSampleQuestionId=NULL);
 
             $this->answer = $this->question_text?->answer_choice;
@@ -139,6 +157,7 @@ class Testscreen extends Component
 
     public function updateTimeLeft()
     {
+        if($this->intial_time_zero !=1) {
         //dd('reached after 20 seconds');
         // Update the time left in the database
         // You can replace this with your actual logic to update the time in the database
@@ -146,7 +165,7 @@ class Testscreen extends Component
 
         if ($this->timeLeft <= 0) {
             $this->timeLeft = 0;
-            if($this->intial_time_zero !=1) {
+
                 $store_time_left = StudentTestTaken::where('id', $this->student_test_takenid)
                     ->where('related_student_id', $this->user_id)
                     ->update(
@@ -162,11 +181,10 @@ class Testscreen extends Component
                 return redirect()->route('exam-list');
             }
 
-        }
-
         $store_time_left = StudentTestTaken::where('id', $this->student_test_takenid)
             ->where('related_student_id', $this->user_id)
             ->update(['udf_1' => $this->timeLeft]);
+        }
     }
 
 
@@ -185,6 +203,7 @@ class Testscreen extends Component
 
     public function showSpecificquestion($question_id)
     {
+
         $this->question_text = StudentTestAnswer::with('relatedQuestionBank')
             ->where('related_student_id', $this->user_id)
             ->where('related_question_bank_id', $question_id)

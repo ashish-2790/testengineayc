@@ -68,6 +68,8 @@ class Create extends Component
             $this->roles = [4];
         }
 
+
+
         if ($this->roles == [4]) {
 
             $exceededAbilities = []; // Initialize an array to store exceeded abilities
@@ -77,19 +79,19 @@ class Create extends Component
 
                 $testId = $this->related_test_type[$key];
 
-                $testTypeCount = User::where('related_school_name_id', Auth::user()->related_school_name_id)
+                $testTypeCount = User::with(['relatedTestType'])->where('related_school_name_id', Auth::user()->related_school_name_id)
                     ->where('related_class_name_id', $this->user->related_class_name_id)
                     ->whereHas('relatedTestType', function ($q) use ($testId) {
                         $q->where('test_id', $testId);
                     })
                     ->count();
 
+
                 $get_school_license_strength = SchoolLicence::where('school_name_id', Auth::user()->related_school_name_id)
                     ->where('related_class_name_id', $this->user->related_class_name_id)
                     ->where('related_test_type_id', $testId)
-                    ->where('inactive', 0)
-                    ->whereDate('valid_from', '>=', $this->current_date)
-                    ->whereDate('valid_to', '<=', $this->current_date)
+                    ->where('valid_from', '<=', $this->current_date)
+                    ->where('valid_to', '>=', $this->current_date)
                     ->first();
 
 
@@ -103,6 +105,7 @@ class Create extends Component
 
                 $errorMessage = "License Strength Exceeded for the following abilities: ";
                 foreach ($exceededTesttype as $abilityId) {
+
                     $abilityName = Test::find($abilityId)->test_name; // Assuming you have a model called Ability
                     $errorMessage .= "$abilityName, ";
                 }
@@ -114,7 +117,7 @@ class Create extends Component
             }
         }
 
-        $this->validate();
+       // $this->validate();
 
         if ($this->logged_in_user_role == 'Admin')
             $this->user->password = $this->password;
@@ -231,6 +234,99 @@ class Create extends Component
                 'string',
                 'nullable',
             ],
+            'user.is_approved' => [
+                'boolean',
+            ],
+            'user.marks_type_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_type_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_type_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_type_11' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_english_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_english_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_english_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_english_11' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_math_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_math_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_math_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_math_11' => [
+                'string',
+                'nullable',
+            ],
+
+            'user.marks_science_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_science_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_science_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_science_11' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_aggregate_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_aggregate_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_aggregate_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_aggregate_11' => [
+                'string',
+                'nullable',
+            ],
+            'user.aspired_career_1' => [
+                'string',
+                'nullable',
+            ],
+            'user.aspired_career_2' => [
+                'string',
+                'nullable',
+            ],
+
         ];
     }
 }

@@ -43,7 +43,6 @@ class Create extends Component
     {
         if ($value == 1) {
             $this->enable_duration = 1;
-
         } else {
             $this->enable_duration = 0;
         }

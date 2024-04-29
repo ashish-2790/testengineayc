@@ -232,7 +232,6 @@ class Edit extends Component
                 'nullable',
             ],
             'questionBank.order_no' => [
-                'string',
                 'nullable',
             ],
             'mediaCollections.question_bank_question_image' => [

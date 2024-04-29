@@ -22,7 +22,7 @@
                     <!-- Buttons -->
                     <div class="mt-12 mx-n2">
                         <div class="d-flex">
-                            <a href="#about" class="btn btn-danger">Get Started</a>
+                            <a href="{{route('register')}}" class="btn btn-danger">Get Started</a>
                             <a href="https://www.youtube.com/embed/z7nVlplzI-8?si=51kcd_Yk-phOxXQ4" class="glightbox btn-watch-video position-relative ms-5 mt-2"><i class="fa-regular fa-circle-play text-danger text-2xl me-3"></i><span class="position-absolute top-1 text-danger">Watch&nbsp;Video</span></a>
                         </div>
                     </div>

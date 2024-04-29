@@ -43,16 +43,19 @@ class Edit extends Component
 
     public function submit()
     {
+
         if ($this->logged_in_user_role == 'School') {
             $this->user->password = $this->user->password??bcrypt('123456');
             $this->user->related_school_name_id = Auth::user()->related_school_name_id;
             $this->roles = [4];
         }
 
-        $this->validate();
+        //$this->validate();
 
         if($this->logged_in_user_role == 'Admin')
             $this->user->password = $this->password;
+
+
         $this->user->save();
         $this->user->relatedTestType()->sync($this->related_test_type);
         $this->user->roles()->sync($this->roles);
@@ -161,6 +164,106 @@ class Edit extends Component
             'user.percent_graduation' => [
                 'string',
                 'nullable',
+            ],
+            'user.marks_type_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_type_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_type_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_type_11' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_english_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_english_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_english_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_english_11' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_science_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_science_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_science_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_science_11' => [
+                'string',
+                'nullable',
+            ],
+
+            'user.marks_math_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_math_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_math_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_math_11' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_aggregate_8' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_aggregate_9' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_aggregate_10' => [
+                'string',
+                'nullable',
+            ],
+            'user.marks_aggregate_11' => [
+                'string',
+                'nullable',
+            ],
+            'user.aspired_career_1' => [
+                'string',
+                'nullable',
+            ],
+            'user.aspired_career_2' => [
+                'string',
+                'nullable',
+            ],
+                'user.school_name' => [
+                'string',
+                'nullable',
+            ],
+            'user.class' => [
+                'string',
+                'nullable',
+            ],
+            'user.is_approved' => [
+                'boolean',
             ],
         ];
     }

@@ -233,7 +233,6 @@ class Create extends Component
                 'nullable',
             ],
             'questionBank.order_no' => [
-                'integer',
                 'nullable',
             ],
             'mediaCollections.question_bank_question_image' => [

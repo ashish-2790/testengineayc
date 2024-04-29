@@ -164,6 +164,43 @@ class Index extends Component
 
         $user_gender = $student_test_taken->relatedStudent->gender;
 
+
+
+        if($user_gender == null)
+        {
+
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'error',
+                'message' => "Student Gender Not Specified. Please Update Student Profile"
+            ]);
+
+            if($this->related_school_name != null)
+            {
+                $value = $this->related_school_name;
+                $query = StudentTestTaken::with(['relatedClassName', 'relatedStudent', 'relatedCreateTest'])
+                    ->whereHas('relatedStudent', function($q) use ($value) {
+                        $q->where('related_school_name_id', $value);
+                    })
+                    ->advancedFilter([
+                        's'               => $this->search ?: null,
+                        'order_column'    => $this->sortBy,
+                        'order_direction' => $this->sortDirection,
+                    ]);
+                $this->studentlist = $query->paginate($this->perPage);
+            }
+            else{
+                $query = StudentTestTaken::with(['relatedClassName', 'relatedStudent', 'relatedCreateTest'])
+                    ->advancedFilter([
+                        's'               => $this->search ?: null,
+                        'order_column'    => $this->sortBy,
+                        'order_direction' => $this->sortDirection,
+                    ]);
+                $this->studentlist = $query->paginate($this->perPage);
+            }
+
+            return;
+        }
+
         $get_user_class = $student_test_taken->related_class_name_id;
 
         $total_raw_score = StudentTestAnswer::where('related_student_id', $this->user_id)

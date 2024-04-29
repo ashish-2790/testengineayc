@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+use App\Models\User;
 use Auth;
 
 class HomeController
@@ -32,8 +33,27 @@ class HomeController
         }elseif(Auth::user()->is_school == 1){
             return view('admin.home', compact('chart1'));
         }
+        elseif(Auth::user()->is_student == 1){
+            if (Auth::user()->is_approved == null) {
+                return redirect()->route('approval.notice');
+            }
+            else{
+                $chk_if_details_exist = User::where('id', Auth::user()->id)
+                    ->whereNotNull('disability_status')
+                    ->whereNotNull('qualification_status')
+                    ->whereNotNull('aspired_career_1')
+                    ->whereNotNull('aspired_career_2')
+                    ->first();
+                if ($chk_if_details_exist == null) {
+                return view('frontend.student-details');
+                }
+                else{
+                    return  view('frontend.student-examlist');
+                }
+            }
+        }
         else{
-            return view('frontend.student-examlist');
+            return view('frontend.webhome');
         }
 
 

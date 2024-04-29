@@ -28,20 +28,11 @@ class Edit extends Component
 
     public array $listsForFields = [];
 
-    public $observation_1;
-    public $observation_2;
-    public $observation_3;
-    public $observation_4;
-    public $observation_5;
-    public $observation_6;
-
-
     public AbilityWiseObservation $abilityWiseObservation;
 
     public function mount(AbilityWiseObservation $abilityWiseObservation)
     {
         $this->abilityWiseObservation = $abilityWiseObservation;
-        $this->abilityWiseObservation->observation_1 = $this->abilityWiseObservation->observation_1->format('Y-m-d');
         $this->stream_group           = $this->abilityWiseObservation->streamGroup()->pluck('id')->toArray();
         $this->stream_master          = $this->abilityWiseObservation->streamMaster()->pluck('id')->toArray();
         $this->college                = $this->abilityWiseObservation->college()->pluck('id')->toArray();

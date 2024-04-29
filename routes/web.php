@@ -33,6 +33,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\UserProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ApprovalController;
+
 
 
 Route::redirect('/login', '/login');
@@ -41,13 +43,14 @@ Auth::routes(['register' => true]);
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
+Route::get('email/approval', [ApprovalController::class, 'show'])->name('approval.notice');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/testscreen', [HomeController::class, 'testScreen'])->name('testscreen');
-    Route::get('/exam-list', [HomeController::class, 'examList'])->name('exam-list');
-    Route::get('/testing', [HomeController::class, 'testing'])->name('testing');
-    Route::get('/student-detail', [HomeController::class, 'studentDetail'])->name('student-detail');
+    Route::get('testscreen', [HomeController::class, 'testScreen'])->name('testscreen');
+    Route::get('exam-list', [HomeController::class, 'examList'])->name('exam-list');
+    Route::get('testing', [HomeController::class, 'testing'])->name('testing');
+    Route::get('student-detail', [HomeController::class, 'studentDetail'])->name('student-detail');
 
 });
 

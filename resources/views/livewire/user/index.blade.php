@@ -68,9 +68,13 @@
                             {{ trans('cruds.user.fields.email') }}
                             @include('components.table.sort', ['field' => 'email'])
                         </th>
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.email_verified_at') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'email_verified_at'])--}}
+{{--                        </th>--}}
                         <th>
-                            {{ trans('cruds.user.fields.email_verified_at') }}
-                            @include('components.table.sort', ['field' => 'email_verified_at'])
+                            {{ trans('cruds.user.fields.is_approved') }}
+                            @include('components.table.sort', ['field' => 'is_approved'])
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.related_class_name') }}
@@ -82,66 +86,66 @@
                         <th>
                             {{ trans('cruds.user.fields.roles') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.user.fields.locale') }}
-                            @include('components.table.sort', ['field' => 'locale'])
-                        </th>
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.locale') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'locale'])--}}
+{{--                        </th>--}}
                         <th>
                             {{ trans('cruds.user.fields.phone_no') }}
                             @include('components.table.sort', ['field' => 'phone_no'])
                         </th>
-                        <th>
-                            {{ trans('cruds.user.fields.age') }}
-                            @include('components.table.sort', ['field' => 'age'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.gender') }}
-                            @include('components.table.sort', ['field' => 'gender'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.occupation') }}
-                            @include('components.table.sort', ['field' => 'occupation'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.address') }}
-                            @include('components.table.sort', ['field' => 'address'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.date_of_birth') }}
-                            @include('components.table.sort', ['field' => 'date_of_birth'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.disability_status') }}
-                            @include('components.table.sort', ['field' => 'disability_status'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.qualification_status') }}
-                            @include('components.table.sort', ['field' => 'qualification_status'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.stream_group') }}
-                            @include('components.table.sort', ['field' => 'stream_group.stream_group_master'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.stream') }}
-                            @include('components.table.sort', ['field' => 'stream.stream_name'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.percent_10') }}
-                            @include('components.table.sort', ['field' => 'percent_10'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.percent_11') }}
-                            @include('components.table.sort', ['field' => 'percent_11'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.percent_12') }}
-                            @include('components.table.sort', ['field' => 'percent_12'])
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.percent_graduation') }}
-                            @include('components.table.sort', ['field' => 'percent_graduation'])
-                        </th>
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.age') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'age'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.gender') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'gender'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.occupation') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'occupation'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.address') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'address'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.date_of_birth') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'date_of_birth'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.disability_status') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'disability_status'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.qualification_status') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'qualification_status'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.stream_group') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'stream_group.stream_group_master'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.stream') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'stream.stream_name'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.percent_10') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'percent_10'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.percent_11') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'percent_11'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.percent_12') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'percent_12'])--}}
+{{--                        </th>--}}
+{{--                        <th>--}}
+{{--                            {{ trans('cruds.user.fields.percent_graduation') }}--}}
+{{--                            @include('components.table.sort', ['field' => 'percent_graduation'])--}}
+{{--                        </th>--}}
                         <th>
                         </th>
                     </tr>
@@ -188,8 +192,12 @@
                                     {{ $user->email }}
                                 </a>
                             </td>
+{{--                            <td>--}}
+{{--                                {{ $user->email_verified_at }}--}}
+{{--                            </td>--}}
+
                             <td>
-                                {{ $user->email_verified_at }}
+                                <input class="disabled:opacity-50 disabled:cursor-not-allowed" type="checkbox" disabled {{ $user->is_approved ? 'checked' : '' }}>
                             </td>
                             <td>
                                 @if($user->relatedClassName)
@@ -206,55 +214,55 @@
                                     <span class="badge badge-relationship">{{ $entry->title }}</span>
                                 @endforeach
                             </td>
-                            <td>
-                                {{ $user->locale }}
-                            </td>
+{{--                            <td>--}}
+{{--                                {{ $user->locale }}--}}
+{{--                            </td>--}}
                             <td>
                                 {{ $user->phone_no }}
                             </td>
-                            <td>
-                                {{ $user->age }}
-                            </td>
-                            <td>
-                                {{ $user->gender_label }}
-                            </td>
-                            <td>
-                                {{ $user->occupation }}
-                            </td>
-                            <td>
-                                {{ $user->address }}
-                            </td>
-                            <td>
-                                {{ $user->date_of_birth }}
-                            </td>
-                            <td>
-                                {{ $user->disability_status_label }}
-                            </td>
-                            <td>
-                                {{ $user->qualification_status_label }}
-                            </td>
-                            <td>
-                                @if($user->streamGroup)
-                                    <span class="badge badge-relationship">{{ $user->streamGroup->stream_group_master ?? '' }}</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if($user->stream)
-                                    <span class="badge badge-relationship">{{ $user->stream->stream_name ?? '' }}</span>
-                                @endif
-                            </td>
-                            <td>
-                                {{ $user->percent_10 }}
-                            </td>
-                            <td>
-                                {{ $user->percent_11 }}
-                            </td>
-                            <td>
-                                {{ $user->percent_12 }}
-                            </td>
-                            <td>
-                                {{ $user->percent_graduation }}
-                            </td>
+{{--                            <td>--}}
+{{--                                {{ $user->age }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->gender_label }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->occupation }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->address }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->date_of_birth }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->disability_status_label }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->qualification_status_label }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                @if($user->streamGroup)--}}
+{{--                                    <span class="badge badge-relationship">{{ $user->streamGroup->stream_group_master ?? '' }}</span>--}}
+{{--                                @endif--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                @if($user->stream)--}}
+{{--                                    <span class="badge badge-relationship">{{ $user->stream->stream_name ?? '' }}</span>--}}
+{{--                                @endif--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->percent_10 }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->percent_11 }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->percent_12 }}--}}
+{{--                            </td>--}}
+{{--                            <td>--}}
+{{--                                {{ $user->percent_graduation }}--}}
+{{--                            </td>--}}
 
                         </tr>
                         @empty

@@ -91,6 +91,9 @@ class User extends Authenticatable implements HasLocalePreference
         'marks_aggregate_11',
         'aspired_career_1',
         'aspired_career_2',
+        'school_name',
+        'class',
+        'is_approved',
 
     ];
 

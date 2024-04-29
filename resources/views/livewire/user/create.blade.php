@@ -83,6 +83,18 @@
                     {{ trans('cruds.user.fields.locale_helper') }}
                 </div>
             </div>
+            <div class="form-group w-full lg:w-4/12 px-4 {{ $errors->has('user.is_approved') ? 'invalid' : '' }}">
+                <input class="form-control" type="checkbox" name="is_approved" id="is_approved" wire:model.defer="user.is_approved">
+                <label class="form-label inline ml-1" for="is_approved">{{ trans('cruds.user.fields.is_approved') }}</label>
+                <div class="validation-message">
+                    {{ $errors->first('user.is_approved') }}
+                </div>
+                <div class="help-block">
+                    {{ trans('cruds.user.fields.is_approved_helper') }}
+                </div>
+            </div>
+
+
         @endif
     </div>
 
@@ -197,92 +209,47 @@
 
         </div>
         <div class="row m-0 g-5  flex">
-            <div class="w-full lg:w-4/12 px-4  pt-4 form-group {{ $errors->has('user.stream_group_id') ? 'invalid' : '' }}">
-                <label class="form-label" for="stream_group">{{ trans('cruds.user.fields.stream_group') }}</label>
-                <x-select-list class="form-control" id="stream_group" name="stream_group"
-                               :options="$this->listsForFields['stream_group']" wire:model="user.stream_group_id"/>
-                <div class="validation-message">
-                    {{ $errors->first('user.stream_group_id') }}
-                </div>
-                <div class="help-block">
-                    {{ trans('cruds.user.fields.stream_group_helper') }}
+            <div class="col-span-12">
+                <div class="container">
+                    <h5 class="text-xl font-bold mb-4">Academic Details:</h5>
+                    <table class="w-full border-collapse border border-gray-300">
+                        <thead>
+                        <tr class="bg-gray-200">
+                            <th class="py-2 px-4 border border-gray-300">Class</th>
+                            <th class="py-2 px-4 border border-gray-300">Aggregate</th>
+                            <th class="py-2 px-4 border border-gray-300">Science</th>
+                            <th class="py-2 px-4 border border-gray-300">Maths</th>
+                            <th class="py-2 px-4 border border-gray-300">English</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(range(8, 11) as $class)
+                            <tr class="border border-gray-300">
+                                <th class="py-2 px-4 border border-gray-300"> {{ $class . 'th' }}</th>
+                                <td class="py-2 px-4 border border-gray-300">
+                                    <div class="flex">
+                                        <select class="flex-shrink-0 border border-gray-300 rounded-l p-2" name="marks_type_{{ $class }}" id="marks_type_{{ $class }}" wire:model="user.marks_type_{{ $class }}">
+                                            <option value="">Select</option>
+                                            <option value="percentage">Percentage</option>
+                                            <option value="grade">Grade</option>
+                                        </select>
+                                        <input type="text" class="flex-grow border border-gray-300 rounded-r p-2" wire:model="user.marks_aggregate_{{ $class }}" placeholder="Enter Aggregate">
+                                    </div>
+                                </td>
+                                <td class="py-2 px-4 border border-gray-300"><input type="text" class="border border-gray-300 p-2" wire:model="user.marks_science_{{ $class }}" placeholder="Enter Science Grade"></td>
+                                <td class="py-2 px-4 border border-gray-300"><input type="text" class="border border-gray-300 p-2" wire:model="user.marks_math_{{ $class }}" placeholder="Enter Math Grade"></td>
+                                <td class="py-2 px-4 border border-gray-300"><input type="text" class="border border-gray-300 p-2" wire:model="user.marks_english_{{ $class }}" placeholder="Enter English Grade"></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="w-full lg:w-4/12 px-4 form-group {{ $errors->has('user.stream_id') ? 'invalid' : '' }}">
-                <label class="form-label" for="stream">{{ trans('cruds.user.fields.stream') }}</label>
-                <x-select-list class="form-control" id="stream" name="stream" :options="$this->listsForFields['stream']"
-                               wire:model="user.stream_id"/>
-                <div class="validation-message">
-                    {{ $errors->first('user.stream_id') }}
-                </div>
-                <div class="help-block">
-                    {{ trans('cruds.user.fields.stream_helper') }}
-                </div>
-            </div>
-            <div class="w-full lg:w-4/12 px-4 form-group {{ $errors->has('user.occupation') ? 'invalid' : '' }}">
-                <label class="form-label" for="occupation">{{ trans('cruds.user.fields.occupation') }}</label>
-                <input class="form-control" type="text" name="occupation" id="occupation"
-                       wire:model.defer="user.occupation">
-                <div class="validation-message">
-                    {{ $errors->first('user.occupation') }}
-                </div>
-                <div class="help-block">
-                    {{ trans('cruds.user.fields.occupation_helper') }}
-                </div>
-            </div>
-
 
         </div>
-        <div class="row m-0 g-5  flex">
-            <div class="w-full lg:w-4/12 px-4 pt-4 form-group {{ $errors->has('user.percent_10') ? 'invalid' : '' }}">
-                <label class="form-label" for="percent_10">{{ trans('cruds.user.fields.percent_10') }}</label>
-                <input class="form-control" type="text" name="percent_10" id="percent_10"
-                       wire:model.defer="user.percent_10">
-                <div class="validation-message">
-                    {{ $errors->first('user.percent_10') }}
-                </div>
-                <div class="help-block">
-                    {{ trans('cruds.user.fields.percent_10_helper') }}
-                </div>
-            </div>
-            <div class="w-full lg:w-4/12 px-4 form-group {{ $errors->has('user.percent_11') ? 'invalid' : '' }}">
-                <label class="form-label" for="percent_11">{{ trans('cruds.user.fields.percent_11') }}</label>
-                <input class="form-control" type="text" name="percent_11" id="percent_11"
-                       wire:model.defer="user.percent_11">
-                <div class="validation-message">
-                    {{ $errors->first('user.percent_11') }}
-                </div>
-                <div class="help-block">
-                    {{ trans('cruds.user.fields.percent_11_helper') }}
-                </div>
-            </div>
-            <div class="w-full lg:w-4/12 px-4 form-group {{ $errors->has('user.percent_12') ? 'invalid' : '' }}">
-                <label class="form-label" for="percent_12">{{ trans('cruds.user.fields.percent_12') }}</label>
-                <input class="form-control" type="text" name="percent_12" id="percent_12"
-                       wire:model.defer="user.percent_12">
-                <div class="validation-message">
-                    {{ $errors->first('user.percent_12') }}
-                </div>
-                <div class="help-block">
-                    {{ trans('cruds.user.fields.percent_12_helper') }}
-                </div>
-            </div>
 
 
-        </div>
         <div class="row m-0 g-5  flex">
-            <div class="w-full lg:w-6/12 px-4 form-group {{ $errors->has('user.percent_graduation') ? 'invalid' : '' }}">
-                <label class="form-label"
-                       for="percent_graduation">{{ trans('cruds.user.fields.percent_graduation') }}</label>
-                <input class="form-control" type="text" name="percent_graduation" id="percent_graduation"
-                       wire:model.defer="user.percent_graduation">
-                <div class="validation-message">
-                    {{ $errors->first('user.percent_graduation') }}
-                </div>
-                <div class="help-block">
-                    {{ trans('cruds.user.fields.percent_graduation_helper') }}
-                </div>
-            </div>
             <div class="w-full lg:w-6/12 px-4 form-group {{ $errors->has('user.address') ? 'invalid' : '' }}">
                 <label class="form-label" for="address">{{ trans('cruds.user.fields.address') }}</label>
                 <textarea class="form-control" name="address" id="address" wire:model.defer="user.address"

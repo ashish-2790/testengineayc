@@ -12,13 +12,6 @@ class Create extends Component
 {
     public array $listsForFields = [];
 
-    public $report_1;
-    public $report_2;
-    public $report_3;
-    public $report_4;
-    public $report_5;
-    public $report_6;
-
     public AbilityWiseResult $abilityWiseResult;
 
     public function mount(AbilityWiseResult $abilityWiseResult)
@@ -35,14 +28,6 @@ class Create extends Component
     public function submit()
     {
         $this->validate();
-
-        $this->abilityWiseResult->report_1 = $this->report_1;
-        $this->abilityWiseResult->report_2 = $this->report_2;
-        $this->abilityWiseResult->report_3 = $this->report_3;
-        $this->abilityWiseResult->report_4 = $this->report_4;
-        $this->abilityWiseResult->report_5 = $this->report_5;
-        $this->abilityWiseResult->report_6 = $this->report_6;
-
 
         $this->abilityWiseResult->save();
 

@@ -82,10 +82,10 @@
                         {{ trans('cruds.user.fields.email') }}
                         @include('components.table.sort', ['field' => 'email'])
                     </th>
-                    <th>
-                        {{ trans('cruds.user.fields.email_verified_at') }}
-                        @include('components.table.sort', ['field' => 'email_verified_at'])
-                    </th>
+{{--                    <th>--}}
+{{--                        {{ trans('cruds.user.fields.email_verified_at') }}--}}
+{{--                        @include('components.table.sort', ['field' => 'email_verified_at'])--}}
+{{--                    </th>--}}
                     <th>
                         {{ trans('cruds.user.fields.related_class_name') }}
                         @include('components.table.sort', ['field' => 'related_class_name.class_name'])
@@ -96,18 +96,18 @@
                     <th>
                         {{ trans('cruds.user.fields.roles') }}
                     </th>
-                    <th>
-                        {{ trans('cruds.user.fields.locale') }}
-                        @include('components.table.sort', ['field' => 'locale'])
-                    </th>
+{{--                    <th>--}}
+{{--                        {{ trans('cruds.user.fields.locale') }}--}}
+{{--                        @include('components.table.sort', ['field' => 'locale'])--}}
+{{--                    </th>--}}
                     <th>
                         {{ trans('cruds.user.fields.phone_no') }}
                         @include('components.table.sort', ['field' => 'phone_no'])
                     </th>
-                    <th>
-                        {{ trans('cruds.user.fields.age') }}
-                        @include('components.table.sort', ['field' => 'age'])
-                    </th>
+{{--                    <th>--}}
+{{--                        {{ trans('cruds.user.fields.age') }}--}}
+{{--                        @include('components.table.sort', ['field' => 'age'])--}}
+{{--                    </th>--}}
                     <th>
                         {{ trans('cruds.user.fields.gender') }}
                         @include('components.table.sort', ['field' => 'gender'])
@@ -133,28 +133,22 @@
                         @include('components.table.sort', ['field' => 'qualification_status'])
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.stream_group') }}
-                        @include('components.table.sort', ['field' => 'stream_group.stream_group_master'])
+                       {{'Aggregate Marks 8'}}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.stream') }}
-                        @include('components.table.sort', ['field' => 'stream.stream_name'])
+                        {{'Aggregate Marks 9'}}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.percent_10') }}
-                        @include('components.table.sort', ['field' => 'percent_10'])
+                        {{'Aggregate Marks 10'}}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.percent_11') }}
-                        @include('components.table.sort', ['field' => 'percent_11'])
+                        {{'Aggregate Marks 11'}}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.percent_12') }}
-                        @include('components.table.sort', ['field' => 'percent_12'])
+                       {{'Aspired Career'}}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.percent_graduation') }}
-                        @include('components.table.sort', ['field' => 'percent_graduation'])
+                        {{'Aspired Career '}}
                     </th>
                     <th>
                     </th>
@@ -201,9 +195,9 @@
                                 {{ $user->email }}
                             </a>
                         </td>
-                        <td>
-                            {{ $user->email_verified_at }}
-                        </td>
+{{--                        <td>--}}
+{{--                            {{ $user->email_verified_at }}--}}
+{{--                        </td>--}}
                         <td>
                             @if($user->relatedClassName)
                                 <span class="badge badge-relationship">{{ $user->relatedClassName->class_name ?? '' }}</span>
@@ -219,15 +213,15 @@
                                 <span class="badge badge-relationship">{{ $entry->title }}</span>
                             @endforeach
                         </td>
-                        <td>
-                            {{ $user->locale }}
-                        </td>
+{{--                        <td>--}}
+{{--                            {{ $user->locale }}--}}
+{{--                        </td>--}}
                         <td>
                             {{ $user->phone_no }}
                         </td>
-                        <td>
-                            {{ $user->age }}
-                        </td>
+{{--                        <td>--}}
+{{--                            {{ $user->age }}--}}
+{{--                        </td>--}}
                         <td>
                             {{ $user->gender_label }}
                         </td>
@@ -247,26 +241,22 @@
                             {{ $user->qualification_status_label }}
                         </td>
                         <td>
-                            @if($user->streamGroup)
-                                <span class="badge badge-relationship">{{ $user->streamGroup->stream_group_master ?? '' }}</span>
-                            @endif
+                        {{ $user->marks_aggregate_8 }}
                         </td>
                         <td>
-                            @if($user->stream)
-                                <span class="badge badge-relationship">{{ $user->stream->stream_name ?? '' }}</span>
-                            @endif
+                           {{ $user->marks_aggregate_9 }}
                         </td>
                         <td>
-                            {{ $user->percent_10 }}
+                           {{ $user->marks_aggregate_10 }}
                         </td>
                         <td>
-                            {{ $user->percent_11 }}
+                            {{ $user->marks_aggregate_11 }}
                         </td>
                         <td>
-                            {{ $user->percent_12 }}
+                            {{ $user->aspired_career_1 }}
                         </td>
                         <td>
-                            {{ $user->percent_graduation }}
+                          {{ $user->aspired_career_2}}
                         </td>
 
                     </tr>

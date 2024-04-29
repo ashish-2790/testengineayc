@@ -109,6 +109,8 @@ return [
             'percent_12_helper'           => ' ',
             'percent_graduation'          => 'Percent Graduation',
             'percent_graduation_helper'   => ' ',
+            'is_approved'                 => 'Is Approved',
+            'is_approved_helper'          => ' ',
         ],
     ],
     'schoolMaster' => [

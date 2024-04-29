@@ -9,7 +9,7 @@ use Livewire\Component;
 class Edit extends Component
 {
     public array $listsForFields = [];
-
+    
     public $report_1;
     public $report_2;
     public $report_3;

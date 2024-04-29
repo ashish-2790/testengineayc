@@ -68,7 +68,7 @@
     </div>
 
     <div class="form-group w-full lg:w-6/12 px-4">
-        <label class="form-label " for="video_url">Multiple Choice</label>
+        <label class="form-label " for="video_url"> Allocate Marks For Each Response</label>
         <input class="form-cotrol" type="checkbox" name="multiple_choice" id="multiple_choice" wire:model="multiple_choice">
     </div>
 
@@ -86,7 +86,7 @@
         @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
-                <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
+                <label class="form-label" for="choice_1">{{ 'Response Marks' }}</label>
                 <input class="form-control" type="text" name="answer_response_1" id="answer_response_1" wire:model="questionBank.answer_response_1">
             </div>
         @else
@@ -118,7 +118,7 @@
         @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
-                <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
+                <label class="form-label" for="choice_1">{{ 'Response Marks' }}</label>
                 <input class="form-control" type="text" name="answer_response_2" id="answer_response_2" wire:model="questionBank.answer_response_2">
             </div>
         @else
@@ -147,7 +147,7 @@
         @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
-                <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
+                <label class="form-label" for="choice_1">{{ 'Response Marks' }}</label>
                 <input class="form-control" type="text" name="answer_response_3" id="answer_response_3" wire:model="questionBank.answer_response_3">
             </div>
         @else
@@ -176,7 +176,7 @@
         @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
-                <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
+                <label class="form-label" for="choice_1">{{ 'Response Marks' }}</label>
                 <input class="form-control" type="text" name="answer_response_4" id="answer_response_4" wire:model="questionBank.answer_response_4">
             </div>
         @else
@@ -205,7 +205,7 @@
         @if($multiple_choice == 1)
 
             <div class="w-full lg:w-4/12  form-group {{ $errors->has('questionBank.choice_1') ? 'invalid' : '' }}">
-                <label class="form-label" for="choice_1">{{ 'Correct Response Marks' }}</label>
+                <label class="form-label" for="choice_1">{{ 'Response Marks' }}</label>
                 <input class="form-control" type="text" name="answer_response_5" id="answer_response_5" wire:model="questionBank.answer_response_5">
             </div>
         @else

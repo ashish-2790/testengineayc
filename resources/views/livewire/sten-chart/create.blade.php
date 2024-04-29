@@ -1,8 +1,20 @@
 <form wire:submit.prevent="submit" class="pt-3">
     <div class="row m-0 g-5  flex">
-    <div class="form-group  w-full lg:w-6/12 px-4 pt-4 {{ $errors->has('stenChart.related_class_id') ? 'invalid' : '' }}">
+    <div class="form-group  w-full lg:w-4/12 px-4 pt-4 {{ $errors->has('stenChart.related_class_id') ? 'invalid' : '' }}">
         <label class="form-label" for="related_class">{{ trans('cruds.stenChart.fields.related_class') }}</label>
-        <x-select-list class="form-control" id="related_class" name="related_class" :options="$this->listsForFields['related_class']" wire:model="stenChart.related_class_id" />
+{{--        <x-select-list class="form-control" id="related_class" name="related_class" :options="$this->listsForFields['related_class']" wire:model="stenChart.related_class_id" />--}}
+
+        <div class="container">
+            <div class="row g-5 pt-3 flex flex-wrap">
+                @foreach($class_list as $class_title)
+                    <div class="md:w-6/12 ms-3">
+                        <label class="inline-flex items-center cursor-pointer">
+                            <input id="relatedclass" name="relatedclass[]" wire:model.defer="relatedclass" value="{{$class_title->id}}" type="checkbox" class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150">
+                            <span class="ml-2 text-sm font-semibold text-blueGray-600">{{$class_title->class_name}}</span></label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
         <div class="validation-message">
             {{ $errors->first('stenChart.related_class_id') }}
         </div>
@@ -10,19 +22,30 @@
             {{ trans('cruds.stenChart.fields.related_class_helper') }}
         </div>
     </div>
-    <div class="form-group  w-full lg:w-6/12 px-4 {{ $errors->has('stenChart.related_test_name_id') ? 'invalid' : '' }}">
-        <label class="form-label" for="related_test_name">{{ trans('cruds.stenChart.fields.related_test_name') }}</label>
-        <x-select-list class="form-control" id="related_test_name" name="related_test_name" :options="$this->listsForFields['related_test_name']" wire:model="stenChart.related_test_name_id" />
-        <div class="validation-message">
-            {{ $errors->first('stenChart.related_test_name_id') }}
-        </div>
-        <div class="help-block">
-            {{ trans('cruds.stenChart.fields.related_test_name_helper') }}
-        </div>
-    </div>
-    <div class="form-group  w-full lg:w-6/12 px-4 {{ $errors->has('stenChart.related_ability_name_id') ? 'invalid' : '' }}">
+{{--    <div class="form-group  w-full lg:w-6/12 px-4 {{ $errors->has('stenChart.related_test_name_id') ? 'invalid' : '' }}">--}}
+{{--        <label class="form-label" for="related_test_name">{{ trans('cruds.stenChart.fields.related_test_name') }}</label>--}}
+{{--        <x-select-list class="form-control" id="related_test_name" name="related_test_name" :options="$this->listsForFields['related_test_name']" wire:model="stenChart.related_test_name_id" />--}}
+{{--        <div class="validation-message">--}}
+{{--            {{ $errors->first('stenChart.related_test_name_id') }}--}}
+{{--        </div>--}}
+{{--        <div class="help-block">--}}
+{{--            {{ trans('cruds.stenChart.fields.related_test_name_helper') }}--}}
+{{--        </div>--}}
+{{--    </div>--}}
+    <div class="form-group  w-full lg:w-8/12 px-4 {{ $errors->has('stenChart.related_ability_name_id') ? 'invalid' : '' }}">
         <label class="form-label" for="related_ability_name">{{ trans('cruds.stenChart.fields.related_ability_name') }}</label>
-        <x-select-list class="form-control" id="related_ability_name" name="related_ability_name" :options="$this->listsForFields['related_ability_name']" wire:model="stenChart.related_ability_name_id" />
+{{--        <x-select-list class="form-control" id="related_ability_name" name="related_ability_name" :options="$this->listsForFields['related_ability_name']" wire:model="stenChart.related_ability_name_id" />--}}
+        <div class="container">
+            <div class="row g-5 pt-3 flex flex-wrap">
+                @foreach($ability_list as $ability_title)
+                    <div class="md:w-4/12 ms-3">
+                        <label class="inline-flex items-center cursor-pointer">
+                            <input id="abilitylist" name="abilitylist[]" wire:model.defer="abilitylist" value="{{$ability_title->id}}" type="checkbox" class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150">
+                            <span class="ml-2 text-sm font-semibold text-blueGray-600">{{$ability_title->ability_name}}</span></label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
         <div class="validation-message">
             {{ $errors->first('stenChart.related_ability_name_id') }}
         </div>

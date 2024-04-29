@@ -16,11 +16,14 @@ class StudentExamlist extends Component
 {
     public $get_exam_list;
     public $current_date_time;
+    public $get_user_class;
+    public $redirect_profile = false;
 
     public function render()
     {
         return view('livewire.frontend.student-examlist');
     }
+
 
     public function mount()
     {
@@ -28,12 +31,17 @@ class StudentExamlist extends Component
 
         $this->current_date_time = now();
 
-        $get_user_class = User::find($user_id);
+        $this->get_user_class = User::find($user_id);
 
         $check_user_school = Auth::user()->related_school_name_id;
 
+        if ($this->get_user_class->gender == null || $this->get_user_class->aspired_career_1 == null) {
+            session()->flash('error', 'Please fill your profile details first.');
+            $this->redirect_profile = true;
+        }
+
         $check_school_validity = SchoolLicence::where('school_name_id', $check_user_school)
-            ->where('related_class_name_id', $get_user_class->related_class_name_id)
+            ->where('related_class_name_id', $this->get_user_class->related_class_name_id)
             ->where('valid_from', '<=', $this->current_date_time)
             ->where('valid_to', '>=', $this->current_date_time)
             ->exists();
@@ -43,11 +51,10 @@ class StudentExamlist extends Component
             $this->get_exam_list = [];
         } else {
             $this->get_exam_list = CreateTest::with(['relatedQuestionPaper'])
-                ->where('related_class_id', $get_user_class->related_class_name_id)
+                ->where('related_class_id', $this->get_user_class->related_class_name_id)
                 ->where('valid_from', '<=', $this->current_date_time)
                 ->where('valid_to', '>=', $this->current_date_time)
                 ->get();
-
 
 
             foreach ($this->get_exam_list as $key => $value) {
@@ -72,13 +79,13 @@ class StudentExamlist extends Component
 
     }
 
-//    public function sendId($test_id)
-//    {
-//        //event(new SendIdEvent($test_id));
-//        //$this->emit('sendId', $test_id);
-//        $encryptedId = Crypt::encrypt($test_id);
-//        return redirect()->route('testscreen', ['id' => $encryptedId)]);
-//    }
+    public function wireInit()
+    {
+        if ($this->get_user_class->school_name == null) {
+            dd('Please select your school');
+            return redirect()->route('student-detail');
+        }
+    }
 
 
 }

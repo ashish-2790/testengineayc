@@ -1,29 +1,41 @@
 <div>
     <style>
         @media print {
+
             .hide-on-print {
                 display: none !important; /* Hide elements with this class when printing */
             }
 
-            td
-            {
+            td {
                 border: solid 1px #fab;
-                width: 100px;
+                width: 100%; /* Set width to auto for better responsiveness */
                 word-wrap: break-word;
+            }
+
+            table {
+                width: 100%; /* Ensure tables take full width of the page */
+                table-layout: auto; /* Allow tables to adjust column width automatically */
+            }
+            .print-brake {
+                page-break-before: always;
+            }
+
+            .add-margin-top {
+                margin-top: 20px;
             }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <div class="container">
+    <div class="container print-brake">
 
-        <div class="row" >
+        <div class="row">
             <div>
-                <button onclick="printWindow()"  class="btn btn-primary mb-3 hide-on-print">Print Report</button>
+                <button onclick="window.print()" class="btn btn-primary mb-3 hide-on-print">Print Report</button>
             </div>
 
-            <div class="col-md-12 border" id="printMe">
-                <img src="{{$prefix_image1->option_value}}" alt="logo" class="h-xxl-auto img-fluid" >
-                <div class="card">
+            <div class="col-md-12 border print-brake" id="printMe">
+                <img src="{{$prefix_image1->option_value}}" alt="logo" class="h-xxl-auto img-fluid">
+                <div class="card print-brake">
 
                     <div class="card-header">
                         <h1 class="text-center mb-3 text-underline"> {{$student_test_taken->relatedCreateTest->relatedTestType->test_name}}</h1>
@@ -32,7 +44,7 @@
                         <div class="py-4 px-3">
                             <div class="p-6 bg-primary-light rounded-end border-4 border-start border-primary">
                                 <div class="row justify-content-center">
-                                    <div class="col-md-5">
+                                    <div class="col-lg-5">
                                         <div class="p-6 bg-primary-light rounded-end border-4 border-top border-primary h-100">
                                             <div class="bg-primary-light">
                                                 <div class="d-flex mb-2 align-items-center justify-content-between">
@@ -40,30 +52,41 @@
                                                         Personal Details</h3>
                                                 </div>
                                                 <div>
+
                                                     <table class="table">
                                                         <tbody>
                                                         <tr>
                                                             <th>Name</th>
-                                                            <td>{{$this->student_details->name??''}}</td>
+                                                            <td class="text-capitalize">{{$this->student_details->name??''}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>Date of Birth</th>
-                                                            <td>{{$this->student_details->date_of_birth??''}}</td>
+                                                            <td>{{date("d-m-Y", strtotime($this->student_details->date_of_birth??''))}}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <th>Age</th>
-                                                            <td>{{$this->student_details->age??''}}</td>
-                                                        </tr>
+                                                        @if($this->student_details->age != null )
+                                                            <tr>
+                                                                <th>Age</th>
+                                                                <td>{{$this->student_details->age??''}}</td>
+                                                            </tr>
+                                                        @endif
                                                         <tr>
                                                             <th>Gender</th>
                                                             <td>{{$this->student_details->gender==1?'Male':'Female'}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>Class</th>
-                                                            <td>{{$this->student_details->relatedClassName->class_name??''}}</td>
+                                                            <td class="text-capitalize">{{$this->student_details->relatedClassName->class_name??''}}</td>
                                                         <tr>
                                                             <th>School</th>
-                                                            <td>{{$this->student_details->relatedSchoolName->name??''}}</td>
+                                                            <td class="text-capitalize">{{$this->student_details->relatedSchoolName->name??''}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Qualification Status</th>
+                                                            <td class="text-capitalize">{{$this->student_details->qualification_status??''}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Physical Status</th>
+                                                            <td class="text-capitalize">{{$this->student_details->disability_status??''}}</td>
                                                         </tr>
 
                                                         </tbody>
@@ -72,7 +95,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-lg-5">
                                         <div class="p-6 bg-primary-light rounded-end border-4 border-bottom border-primary">
                                             <div class="bg-primary-light">
                                                 <div class="d-flex mb-2 align-items-center justify-content-between">
@@ -81,33 +104,96 @@
                                                 </div>
                                                 <div>
                                                     <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Class</th>
+                                                            <th>Aggregate</th>
+                                                            <th>Science</th>
+                                                            <th>Maths</th>
+                                                            <th>English</th>
+                                                        </tr>
+                                                        </thead>
                                                         <tbody>
-                                                        <tr>
-                                                            <th>Qualification Status</th>
-                                                            <td>{{$this->student_details->qualification_status??''}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Stream</th>
-                                                            <td>{{$this->student_details->stream->stream_name??''}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Stream Group</th>
-                                                            <td>{{$this->student_details->streamGroup->stream_group_master??''}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>10th %</th>
-                                                            <td>{{$this->student_details->percent_10??''}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>11th %</th>
-                                                            <td>{{$this->student_details->percent_11??''}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>12th %</th>
-                                                            <td>{{$this->student_details->percent_12??''}}</td>
-                                                        </tr>
+                                                        @if($this->student_details->marks_aggregate_8 != null)
+                                                            <tr>
+                                                                <th scope="row">8th</th>
+                                                                <td>
+                                                                    {{$this->student_details->marks_aggregate_8??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_science_8??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_math_8??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_english_8??''}}
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                        @if($this->student_details->marks_aggregate_9 != null)
+                                                            <tr>
+                                                                <th scope="row">9th</th>
+                                                                <td>
+
+                                                                    {{$this->student_details->marks_aggregate_9??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_science_9??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_math_9??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_english_9??''}}
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                        @if($this->student_details->marks_aggregate_10 != null)
+                                                            <tr>
+                                                                <th scope="row">10th</th>
+                                                                <td>
+
+                                                                    {{$this->student_details->marks_aggregate_10??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_science_10??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_math_10??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_english_10??''}}
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                        @if($this->student_details->marks_aggregate_11 != null)
+                                                            <tr>
+                                                                <th scope="row">11th</th>
+                                                                <td>
+
+                                                                    {{$this->student_details->marks_aggregate_11??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_science_11??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_math_11??''}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$this->student_details->marks_english_11??''}}
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+
                                                         </tbody>
                                                     </table>
+                                                    <div class="mt-5">
+                                                        <p>Aspired Career 1: {{$this->student_details->aspired_career_1??''}} </p>
+                                                        <p>Aspired Career 2: {{$this->student_details->aspired_career_2??''}} </p>
+                                                    </div>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -116,7 +202,7 @@
                             </div>
                         </div>
 
-                        <div class="justify-content-evenly row ">
+                        <div class="justify-content-evenly row print-brake add-margin-top">
                             <h4 class="text-center mb-3 text-underline">Your Test Report : Graphical Representation</h4>
                             <div class="w-xxl-screen-md h-96 mt-5">
                                 <canvas id="examChart" width="200" height="200"></canvas>
@@ -145,22 +231,24 @@
                         </div>
 
                         <hr>
-                        <h4 class="text-center text-underline mb-5">Your Test Report : Ability Wise</h4>
                         @foreach ($student_abilitywise_report as $ability_report)
-                            <section class="py-4 px-3">
+                            <section class="py-4 px-3 print-brake">
                                 <div class="container-fluid p-6 bg-primary-light rounded-end border-4 border-end border-primary">
                                     <div class="ps-md-12 bg-primary-light rounded">
                                         <div class="row">
                                             <div class="col-12 col-md-12 py-2 mb-1 mb-md-0">
-                                                <b> {{$ability_report->ability->ability_name??''}}</b>
+                                                <b> Your Test Report : {{$ability_report->ability->ability_name??''}}</b>
                                                 <ul>
                                                     <li>{{ $ability_report->short_description??'' }}</li>
                                                 </ul>
                                                 <b>Sten Score: </b> {{ $ability_report->ability_sten_score ??''}}
+                                                <div class="justify-content-evenly row ">
                                                 <div class="w-xxl-screen-md h-96 ">
                                                     <!-- Canvas for individual ability chart -->
-                                                    <canvas id="{{$ability_report->ability->ability_name??''}}" class="ability-chart"
-                                                            width="400" height="200"></canvas>
+                                                    <canvas id="{{$ability_report->ability->ability_name??''}}"
+                                                            class="ability-chart"
+                                                            width="200" height="200"></canvas>
+                                                </div>
                                                 </div>
                                                 <section class="py-4 px-3">
                                                     <div class="container-fluid">
@@ -169,27 +257,27 @@
 
                                                                 <div class="col-12 col-md-6  p-2 bg-primary-light rounded-end border-4 border-end border-primary mb-1 mb-md-0">
 
-                                                                    <p class=" text-dark">  {{ $ability_report->report_1??''}}</p>
+                                                                    <p class=" text-dark">  {!! $ability_report->report_1??'' !!}</p>
                                                                 </div>
                                                                 <div class="col-12 col-md-6  p-3 bg-primary-light mb-1 mb-md-0">
 
-                                                                    <p class=" text-dark"> {{ $ability_report->report_2??''}}</p>
+                                                                    <p class=" text-dark"> {!! $ability_report->report_2??'' !!}</p>
                                                                 </div>
                                                                 <div class="col-12 col-md-6  p-3 bg-primary-light mb-1 mb-md-0">
 
-                                                                    <p class=" text-dark"> {{ $ability_report->report_3??''}}</p>
+                                                                    <p class=" text-dark">  {!! $ability_report->report_3??'' !!}</p>
                                                                 </div>
                                                                 <div class="col-12 col-md-6  p-3 bg-primary-light mb-1 mb-md-0">
 
-                                                                    <p class=" text-dark"> {{ $ability_report->report_4??''}}</p>
+                                                                    <p class=" text-dark">  {!! $ability_report->report_4??'' !!}</p>
                                                                 </div>
                                                                 <div class="col-12 col-md-6  p-3 bg-primary-light mb-1 mb-md-0">
 
-                                                                    <p class=" text-dark"> {{ $ability_report->report_5??''}}</p>
+                                                                    <p class=" text-dark">  {!! $ability_report->report_5??'' !!}</p>
                                                                 </div>
                                                                 <div class="col-12 col-md-6  p-3 bg-primary-light mb-1 mb-md-0">
 
-                                                                    <p class=" text-dark"> {{ $ability_report->report_6??''}}</p>
+                                                                    <p class=" text-dark">  {!! $ability_report->report_6??'' !!}</p>
                                                                 </div>
 
                                                                 <div class="col-12 col-md-6  p-3 bg-primary-light mb-1 mb-md-0">
@@ -284,7 +372,8 @@
         });
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         function printDiv(divName) {
             var printContents = document.getElementById(divName).innerHTML;

@@ -5,7 +5,7 @@
 <!-- NAVIGATION -->
 <nav class="navbar bg-danger pt-0 pb-0">
     <div class="container-fluid pt-0 pb-0">
-        <a href="index.html" class="navbar-brand pt-0 pb-0"><img src="https://iqwing.s3.ap-south-1.amazonaws.com/cms/results/2024-03/1710910341513.png" class="img-fluid h-18"></a>
+        <a href="#" class="navbar-brand pt-0 pb-0"><img src="https://iqwing.s3.ap-south-1.amazonaws.com/cms/results/2024-03/1710910341513.png" class="img-fluid h-18"></a>
         @auth
         <div class="dropdown float-right ms-lg-4">
             <a class="d-block p-0" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

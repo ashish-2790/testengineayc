@@ -17,7 +17,7 @@ class Create extends Component
     public $report_4;
     public $report_5;
     public $report_6;
-
+    
 
     public ReportTemplate $reportTemplate;
 

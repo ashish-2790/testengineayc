@@ -154,9 +154,15 @@
                             @else
                                 <td>
                                     @if($studentTestTaken->udf_1 <= 0)
+                                        @if(auth()->user()->is_admin == 1)
                                     <button class="btn btn-sm btn-rose mr-2" type="button" wire:click="submitExamForce({{$studentTestTaken->id}})" >
                                         {{ 'Submit-Test' }}
                                     </button>
+                                            @else
+                                            <button class="btn btn-sm btn-primary mr-2" type="button" wire:click="" >
+                                                {{ 'Not Yet Submitted' }}
+                                            </button>
+                                        @endif
                                     @else
                                         <button class="btn btn-sm btn-primary mr-2" type="button" wire:click="" >
                                             {{ 'Exam In-Progress' }}

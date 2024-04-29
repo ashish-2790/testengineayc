@@ -1,4 +1,24 @@
 <div>
+
+        <div>
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+            @if (session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+
+    @if ($this->redirect_profile == true)
+        <script>
+            window.location.href = "{{ route('student-detail') }}";
+        </script>
+    @endif
+
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>--}}
 @if(!empty($get_exam_list))
     <div class="py-12">
@@ -32,7 +52,7 @@
                                 </ul>
                                 <div class="text-center mt-2">
 
-                                    <a href="#" class="mb-3 btn btn-lg p-2 bg-danger btn-radius text-white" data-bs-toggle="modal" data-bs-target="#disclaimertext" data-bs-whatever="@mdo">Instructions</a>
+                                    <a href="#" class="mb-3 btn btn-lg p-2 bg-danger btn-radius text-white" data-bs-toggle="modal" data-bs-target="#disclaimertext{{$exam->id}}" data-bs-whatever="@mdo">Instructions</a>
 
                                     @if($exam->test_taken == true)
                                         @if($exam->stage == 2)
@@ -52,7 +72,7 @@
                     <!-- Instuction Modal -->
 
 
-                    <div class="modal fade" id="disclaimertext" tabindex="-1" aria-labelledby="exampleModalLabels" aria-hidden="true">
+                    <div class="modal fade" id="disclaimertext{{$exam->id}}" tabindex="-1" aria-labelledby="exampleModalLabels" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">

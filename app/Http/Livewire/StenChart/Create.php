@@ -11,6 +11,10 @@ use Livewire\Component;
 class Create extends Component
 {
     public StenChart $stenChart;
+    public $class_list;
+    public $ability_list;
+    public $abilitylist = [];
+    public array $relatedclass=[];
 
     public array $listsForFields = [];
 
@@ -19,6 +23,8 @@ class Create extends Component
         $this->stenChart           = $stenChart;
         $this->stenChart->inactive = false;
         $this->initListsForFields();
+        $this->ability_list = AbilityMaster::get();
+        $this->class_list = ClassMaster::get();
     }
 
     public function render()
@@ -30,7 +36,25 @@ class Create extends Component
     {
         $this->validate();
 
-        $this->stenChart->save();
+        foreach ($this->relatedclass as  $value) {
+            foreach ($this->abilitylist as $abilityvalue) {
+                $this->stenChart->related_class_id = $value;
+                $this->stenChart->related_ability_name_id = $abilityvalue;
+                $get_testtype = AbilityMaster::where('id', $abilityvalue)->first();
+                $this->stenChart->related_test_name_id = $get_testtype->related_test_id;
+                $created = StenChart::create([
+                    'related_test_name_id' => $this->stenChart->related_test_name_id,
+                    'related_ability_name_id' => $this->stenChart->related_ability_name_id,
+                    'related_class_id' => $value,
+                    'max_score_raw' => $this->stenChart->max_score_raw,
+                    'score_raw_from' => $this->stenChart->score_raw_from,
+                    'score_raw_to' => $this->stenChart->score_raw_to,
+                    'sten_score' => $this->stenChart->sten_score,
+                    'udf_1' => $this->stenChart->udf_1,
+                    'inactive' => $this->stenChart->inactive,
+                ]);
+            }
+        }
 
         return redirect()->route('admin.sten-charts.index');
     }
